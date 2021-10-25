@@ -4,7 +4,7 @@
 Build Containers For All Mas-Services will be applied
 This includes:
 * gateway microservice will run in port 7000
-* masclient<react-client> will run in port 25566
+* masclient<react-client> will run in port 25566-9000
 * maslogin microservice will run in port 9001
 * biller microservice will run in port 9002
 * applications microservice will run in port 9003
