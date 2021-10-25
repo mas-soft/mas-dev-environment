@@ -16,5 +16,7 @@ This includes:
 * MAS_IDLE_DB_CONNECTION : define idel connection database
 
 ```
-Note:for testing you can use
-maxclient application with port in container
+Note:for testing 
+1- Install Docker
+2- Run docker compose up
+now you can use maxclient application with port in container
