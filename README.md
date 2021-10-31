@@ -20,3 +20,5 @@ Note:for testing
 1- Install Docker
 2- Run docker compose up
 now you can use maxclient application with port in container
+
+## Adding Billinggroups - CustomerBooks <Queries>
