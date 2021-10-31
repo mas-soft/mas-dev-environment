@@ -16,7 +16,7 @@ services:
     ports:
       - "9002:9002"
   applications:
-    image: massoft/applications:v2.0.2
+    image: massoft/applications:v2.0.3
     restart: always
     environment:
       MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
