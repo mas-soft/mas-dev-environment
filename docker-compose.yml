@@ -1,4 +1,4 @@
-version: "1.6"
+version: "1.7"
 services:
   gatway:
     image: massoft/masbillergateway:v1.0.0
@@ -16,7 +16,7 @@ services:
     ports:
       - "9002:9002"
   applications:
-    image: massoft/applications:v2.0.3
+    image: massoft/applications:v2.0.4
     restart: always
     environment:
       MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
@@ -34,7 +34,7 @@ services:
     ports:
       - "9001:9001"
   masquires:
-    image: massoft/masqueries:v1.0.4
+    image: massoft/masqueries:v1.0.5
     restart: always
     environment:
       MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
