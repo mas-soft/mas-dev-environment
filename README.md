@@ -22,3 +22,4 @@ Note:for testing
 now you can use maxclient application with port in container
 
 ## Adding Billinggroups - CustomerBooks <Queries></Queries>
+## Adding ApplicationTypes
