@@ -21,5 +21,5 @@ Note:for testing
 2- Run docker compose up
 now you can use maxclient application with port in container
 
-## Adding Billinggroups - CustomerBooks <Queries></Queries>
-## Adding ApplicationTypes
+## Adding Fields in table<CANCEL_REQUEST>
+### TELE, EMAIL, NID, AGREEMENT
