@@ -9,6 +9,7 @@ This includes:
 * biller microservice will run in port 9002
 * applications microservice will run in port 9003
 * queries microservice will run in port 9004
+* customers microservice will run in port 9005
 
 # Configurations Database
 * MAS_DB_CONNECTION : define connection database
@@ -21,5 +22,4 @@ Note:for testing
 2- Run docker compose up
 now you can use maxclient application with port in container
 
-## Adding Fields in table<CANCEL_REQUEST>
-### TELE, EMAIL, NID, AGREEMENT
+## Adding CRUD For Customers and GroupAccount tables

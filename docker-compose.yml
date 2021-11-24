@@ -1,7 +1,7 @@
-version: "1.10"
+version: "1.11"
 services:
   gatway:
-    image: massoft/masbillergateway:v1.0.0
+    image: massoft/masbillergateway:v1.0.1
     restart: always
     ports:
       - "7000:7000"
@@ -16,7 +16,7 @@ services:
     ports:
       - "9002:9002"
   applications:
-    image: massoft/applications:v2.0.16
+    image: massoft/applications:v2.0.18
     restart: always
     environment:
       MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
@@ -48,3 +48,12 @@ services:
     ports:
       - "25566:25566"
       - "9000:9000"
+  mascustomers:
+    image: massoft/customers:v1.0.0
+    restart: always
+    environment:
+      MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
+      MAS_MAX_DB_CONNECTIONS: 100
+      MAS_IDLE_DB_CONNECTION:  10
+    ports:
+      - "9005:9005"
