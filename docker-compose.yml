@@ -1,4 +1,6 @@
-version: "1.11"
+version: "1.13"
+x-var: &APP_DB
+  server=host.docker.internal;user id=sa;password=hcs@mas;port=1433;database=GIZA;
 services:
   gatway:
     image: massoft/masbillergateway:v1.0.1
@@ -7,19 +9,19 @@ services:
       - "7000:7000"
       - "8090:8090"
   biller:
-    image: massoft/masbiller:v2.6.2
+    image: massoft/masbiller:v2.6.3
     restart: always
     environment:
-      MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
+      MAS_DB_CONNECTION: *APP_DB
       MAS_MAX_DB_CONNECTIONS: 100
       MAS_IDLE_DB_CONNECTION:  10
     ports:
       - "9002:9002"
   applications:
-    image: massoft/applications:v2.0.18
+    image: massoft/applications:v2.0.29
     restart: always
     environment:
-      MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
+      MAS_DB_CONNECTION: *APP_DB
       MAS_MAX_DB_CONNECTIONS: 100
       MAS_IDLE_DB_CONNECTION:  10
     ports:
@@ -28,7 +30,7 @@ services:
     image: massoft/maslogin:v1.0.1
     restart: always
     environment:
-      MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
+      MAS_DB_CONNECTION: *APP_DB
       MAS_MAX_DB_CONNECTIONS: 100
       MAS_IDLE_DB_CONNECTION:  10
     ports:
@@ -37,13 +39,13 @@ services:
     image: massoft/masqueries:v1.0.8
     restart: always
     environment:
-      MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
+      MAS_DB_CONNECTION: *APP_DB
       MAS_MAX_DB_CONNECTIONS: 100
       MAS_IDLE_DB_CONNECTION:  10
     ports:
       - "9004:9004"
   masclient:
-    image: massoft/masclient:v1.0.8
+    image: massoft/masclient:v1.0.16
     restart: always
     ports:
       - "25566:25566"
@@ -52,7 +54,7 @@ services:
     image: massoft/customers:v1.0.0
     restart: always
     environment:
-      MAS_DB_CONNECTION: "server=host.docker.internal;database=giza;user id=sa;password=hcs@mas"
+      MAS_DB_CONNECTION: *APP_DB
       MAS_MAX_DB_CONNECTIONS: 100
       MAS_IDLE_DB_CONNECTION:  10
     ports:
