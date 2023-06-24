@@ -1,0 +1,30 @@
+version: "1.13"
+services:
+  gateway:
+    image: massoft/masbillergateway:latest
+    restart: always
+    ports:
+      - "7000:7000"
+      - "8090:8090"
+  applications:
+    image: massoft/applications-service:latest
+    restart: always
+    environment:
+      MAS_MAX_DB_CONNECTIONS: 100
+      MAS_IDLE_DB_CONNECTION: 10
+    ports:
+      - "9003:9003"
+  maslogin:
+    image: massoft/go-oauth-service:1.1.63
+    restart: always
+    environment:
+      MAS_MAX_DB_CONNECTIONS: 100
+      MAS_IDLE_DB_CONNECTION: 10
+    ports:
+      - "9001:9001"
+  masclient:
+    image: massoft/masclient:v1.0.19
+    restart: always
+    ports:
+      - "25566:25566"
+      - "9000:9000"

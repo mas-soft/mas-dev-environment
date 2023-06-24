@@ -1,0 +1,311 @@
+{
+  "host": "0.0.0.0",
+  "http_port": 7000,
+  "tls_port": 3000,
+  "run_tls_server": false,
+  "isPfx": false,
+  "pfx_file_location": "certs/hcww.com.eg.pfx",
+  "pfx_file_password": "123456",
+  "certificate_location": "certs/cert.pem",
+  "privatekey_location": "certs/privkey.pem",
+  "run_http_server": true,
+  "no_requests_per_ip_endpoint": 10,
+  "brust": 5,
+  "allow_all_origin": false,
+  "max_call_recv_msg_size": 10000000000,
+  "allowed_origins": [
+    "*"
+  ],
+  "allowed_headers": [
+    "*"
+  ],
+  "grpc_services": [
+    {
+      "service_name": "billing.LoginService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9001"
+        }
+      ]
+    },
+    {
+      "service_name": "billing.Engine",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9002"
+        }
+      ]
+    },
+    {
+      "service_name": "services.applicationService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "bpm:9003"
+        }
+      ]
+    },
+    {
+      "service_name": "services.queryService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9004"
+        }
+      ]
+    },
+    {
+      "service_name": "services.CustomerService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9005"
+        }
+      ]
+    },
+    {
+      "service_name": "BillingRepositorySys.IBilngDataSource",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9006"
+        }
+      ]
+    },
+    {
+      "service_name": "SystemServices.SystemService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9007"
+        }
+      ]
+    },
+    {
+      "service_name": "MasProvider.MasProvider",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "masprovider:9008"
+        }
+      ]
+    },
+    {
+      "service_name": "ApplicationServices.ApplicationService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9011"
+        }
+      ]
+    },
+    {
+      "service_name": "InvoiceServices.InvoiceService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9035"
+        }
+      ]
+    },
+    {
+      "service_name": "ActivityServices.ActivityService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9029"
+        }
+      ]
+    },
+    {
+      "service_name": "PlansAppServices.PlansAppService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9021"
+        }
+      ]
+    },
+    {
+      "service_name": "notifications.NotificationNewsService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "192.168.1.10:9025"
+        }
+      ]
+    },
+    {
+      "service_name": "int",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9012"
+        }
+      ]
+    },
+    {
+      "service_name": "MobileServices.MobileService",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9016"
+        }
+      ]
+    },
+    {
+      "service_name": "GoAuth.login",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "authservice:9010"
+        }
+      ]
+    },
+    {
+      "service_name": "GoAuth.GoAuth",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "authservice:9009"
+        }
+      ]
+    },
+    {
+      "service_name": "CRMIntegrationPkg.CRM_Integration",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "integration:9015"
+        }
+      ]
+    },
+    {
+      "service_name": "custmodpkg.CustMod",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9020"
+        }
+      ]
+    },
+    {
+      "service_name": "paymentgateway.paymentgateway",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "paymentgateway:9017"
+        }
+      ]
+    },
+    {
+      "service_name": "masgate.MasPaymentGateway",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9027"
+        }
+      ]
+    },
+    {
+      "service_name": "CashBox.CashBox",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "cashbox:9018"
+        }
+      ]
+    },
+    {
+      "service_name": "PkgMasCustomers.MasCustomers",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9028"
+        }
+      ]
+    },
+    {
+      "service_name": "massystem.massystem",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9030"
+        }
+      ]
+    },
+    {
+      "service_name": "ein.ein",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9032"
+        }
+      ]
+    },
+    {
+      "service_name": "PkgMasMeetings.MasMeetings",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9031"
+        }
+      ]
+    },
+    {
+      "service_name": "PkgEtaAuth.EtaAuth",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9033"
+        }
+      ]
+    },
+    {
+      "service_name": "PkgEtaExcel.EtaExcel",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9034"
+        }
+      ]
+    },
+    {
+      "service_name": "e_invoice_provider.e_invoice_provider",
+      "max_call_recv_msg_size": 10000000000,
+      "backends": [
+        {
+          "address": "localhost:9036"
+        }
+      ]
+    },
+    {
+      "service_name": "test.google",
+      "max_call_recv_msg_size": 5242880,
+      "is_grpc": false,
+      "backends": [
+        {
+          "address": "https://catfact.ninja"
+        }
+      ]
+    }
+  ],
+  "http_routes": [
+    {
+      "url": "/api",
+      "backends": [
+        {
+          "address": "http://localhost:25505"
+        },
+        {
+          "address": "http://localhost:25506"
+        },
+        {
+          "address": "http://localhost:25507"
+        }
+      ]
+    }
+  ]
+}
