@@ -1,140 +1,73 @@
 version: "3.9"
+x-var: &HOST 172.20.10.2
 services:
+  providergateway:
+    image: massoft/provider-gateway:latest
+    container_name: "providergateway"
+    restart: always
+    volumes:
+      - ./config:/root/config
+    environment:
+      - CONFIG_PATH=config/config.yaml
+
   auth:
     image: massoft/go-oauth:latest
-    container_name: "authservice"
-    depends_on:
-      - bpmdb
-      - gateway
-      - masprovider
+    container_name: "auth"
     restart: always
     volumes:
       - ./config:/root/config
     environment:
       - CONFIG_PATH=config/config.yaml
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 9009:9009
-      - 9010:9010
-
-  masprovider:
-    image: massoft/go-masprovider:latest
-    container_name: "masprovider"
-    depends_on:
-      - bpmdb
-      - gateway
-    restart: always
-    volumes:
-      - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 9008:9008
-
-  bpm:
-    image: massoft/applications-service:latest
-    container_name: "bpm"
-    depends_on:
-      - bpmdb
-      - gateway
-    restart: always
-    volumes:
-      - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 9003:9003
-
-  paymentgateway:
-    image: massoft/payment-gateway:latest
-    container_name: "paymentgateway"
-    depends_on:
-      - bpmdb
-      - gateway
-    restart: always
-    volumes:
-      - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 9017:9017
 
   cashbox:
     image: massoft/go-cashbox:latest
     container_name: "cashbox"
-    depends_on:
-      - bpmdb
-      - gateway
     restart: always
     volumes:
       - ./config:/root/config
     environment:
       - CONFIG_PATH=config/config.yaml
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 9018:9018
 
-  integration:
-    image: massoft/integration-service:latest
-    container_name: "integration"
-    depends_on:
-      - bpmdb
-      - gateway
+  paymentgateway:
+    image: massoft/payment-gateway:latest
+    container_name: "paymentgateway"
     restart: always
     volumes:
       - ./config:/root/config
     environment:
       - CONFIG_PATH=config/config.yaml
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 9015:9015
 
-  bpmdb:
-    image: massoft/bpm-db:latest
-    container_name: "bpmdb"
-    networks:
-      - backend
-    extra_hosts:
-      - "myserver:192.168.1.10"
-    ports:
-      - 1433:1433
+  mobile:
+    image: massoft/mobile-service:latest
+    container_name: "mobile"
+    restart: always
+    volumes:
+      - ./config:/root/config
+    environment:
+      - CONFIG_PATH=config/config.yaml
 
   gateway:
     image: massoft/grpc-gateway:latest
     container_name: "gateway"
     restart: always
     ports:
-      - 7001:7000
+      - 7001:7001
+      - 7000:7000
     environment:
       - CONFIG_PATH=config/config.json
-    networks:
-      - backend
     volumes:
       - ./config:/root/config
       - ./certs:/root/certs
-    extra_hosts:
-      - "myserver:192.168.1.10"
+
+  bpm:
+    image: massoft/applications-service:latest
+    container_name: "bpm"
+    restart: always
+    environment:
+      - CONFIG_PATH=config/config.yaml
+    volumes:
+      - ./config:/root/config
+      - ./certs:/root/certs
 
   bpmclient:
     image: massoft/mas-bpm-client:latest
@@ -148,10 +81,11 @@ services:
       - ./certs:/root/certs
     environment:
       - CLIENT_gateway=http://gateway:7000
-    networks:
-      - backend
-      - frontend
 
-networks:
-  backend:
-  frontend:
+  bpmdb:
+    image: massoft/bpm-db:latest
+    container_name: "bpmdb"
+    extra_hosts:
+      - "myserver:192.168.1.10"
+    ports:
+      - 1433:1433

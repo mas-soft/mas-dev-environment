@@ -1,0 +1,1 @@
+sudo docker exec -it db sh init_db.sh
