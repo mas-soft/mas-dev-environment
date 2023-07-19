@@ -1,1 +1,1 @@
-sudo docker exec -it db sh init_db.sh
+sudo docker exec -it bpmdb sh init_db.sh
