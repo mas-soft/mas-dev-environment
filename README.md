@@ -19,7 +19,7 @@ This includes:
 ```
 Note:for testing 
 1- Install Docker
-2- Run docker compose up
-now you can use maxclient application with port in container
-
-## Adding CRUD For Customers and GroupAccount tables
+2- cd bpm/latest
+3 docker compose pull
+4 docker compose up -d
+5 docker ps # for check running services

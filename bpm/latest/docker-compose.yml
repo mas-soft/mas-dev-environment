@@ -50,9 +50,6 @@ services:
     image: massoft/grpc-gateway:latest
     container_name: "gateway"
     restart: always
-    ports:
-      - 7001:7001
-      - 7000:7000
     environment:
       - CONFIG_PATH=config/config.json
     volumes:
@@ -87,5 +84,3 @@ services:
     container_name: "bpmdb"
     extra_hosts:
       - "myserver:192.168.1.10"
-    ports:
-      - 1433:1433
