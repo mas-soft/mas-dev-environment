@@ -1,25 +1,28 @@
 # Docker Container Environment
-## Project <Docker Compose>
-
-Build Containers For All Mas-Services will be applied
-This includes:
-* gateway microservice will run in port 7000
-* masclient<react-client> will run in port 25566-9000
-* maslogin microservice will run in port 9001
-* biller microservice will run in port 9002
-* applications microservice will run in port 9003
-* queries microservice will run in port 9004
-* customers microservice will run in port 9005
-
-# Configurations Database
-* MAS_DB_CONNECTION : define connection database
-* MAS_MAX_DB_CONNECTIONS : define max dabase connection
-* MAS_IDLE_DB_CONNECTION : define idel connection database
-
-```
 Note:for testing 
 1- Install Docker
-2- cd bpm/latest
-3 docker compose pull
-4 docker compose up -d
-5 docker ps # for check running services
+
+```
+cd bpm/latest
+docker compose pull
+docker compose up -d
+```
+## Restore datbase
+### لايد من الانتظار دقيقة قبل تحميل قاعدة البيانات حتى يكون خادم قاعدة البيانات جاهزا
+### استعادة قاعدة البيانات ربما تاخذ بعض الوقت حسب حجم قاعدة البيانات
+```
+sudo docker exec -it bpmdb sh init_db.sh
+```
+
+## للتاكد من عمل كل الخدمات
+### لابد من الانتظار عدة ثواني قبل تشغيل الامر : حتى تكون كل الخدمات تم ربطها على قاعدة البيانات
+```
+docker ps # for check running services
+```
+<img width="925" alt="image" src="https://github.com/mas-soft/mas-dev-environment/assets/9312799/bd2b61e5-b4c9-4f5a-94e1-8417b8a2e6e9">
+
+## للتشغيل 
+```
+http://localhost:1080
+https://localhost:10443
+```
