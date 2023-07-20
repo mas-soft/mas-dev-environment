@@ -46,3 +46,9 @@ docker compose restart
 ```
 docker compose down
 ```
+
+## Restart Servcie 
+### على سبيل المثال الخزينة
+```
+docker restart cashbox
+```
