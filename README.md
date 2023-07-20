@@ -26,3 +26,23 @@ docker ps # for check running services
 http://localhost:1080
 https://localhost:10443
 ```
+
+## STOP Cluster
+```
+docker compose stop
+```
+
+
+
+## Restart Cluster
+```
+docker compose restart
+```
+
+
+
+## Drop Cluster
+### جميع البيانات المسجلة داحل قاعدة البيانات سوف تحذف ولا يمكن الرجوع اليها
+```
+docker compose down
+```
