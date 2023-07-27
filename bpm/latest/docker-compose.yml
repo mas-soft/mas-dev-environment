@@ -1,74 +1,84 @@
 version: "3.9"
-x-var: &HOST 172.20.10.2
+
 services:
   providergateway:
     image: massoft/provider-gateway:latest
-    container_name: "providergateway"
     restart: always
     volumes:
       - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
+    env_file:
+      - .env
+    networks:
+      - back-tier
 
   auth:
     image: massoft/go-oauth:latest
-    container_name: "auth"
     restart: always
     volumes:
       - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
+    env_file:
+      - .env
+    networks:
+      - back-tier
 
   cashbox:
     image: massoft/go-cashbox:latest
-    container_name: "cashbox"
     restart: always
     volumes:
       - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
+    env_file:
+      - .env
+    networks:
+      - back-tier
 
   paymentgateway:
     image: massoft/payment-gateway:latest
-    container_name: "paymentgateway"
     restart: always
     volumes:
       - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
+    env_file:
+      - .env
+    networks:
+      - back-tier
 
   mobile:
     image: massoft/mobile-service:latest
-    container_name: "mobile"
     restart: always
     volumes:
       - ./config:/root/config
-    environment:
-      - CONFIG_PATH=config/config.yaml
+    env_file:
+      - .env
+    networks:
+      - front-tier
+      - back-tier
 
   gateway:
     image: massoft/grpc-gateway:latest
-    container_name: "gateway"
     restart: always
     environment:
-      - CONFIG_PATH=config/config.json
+      CONFIG_PATH: '${GATEWAY_CONFIG_PATH}'
     volumes:
       - ./config:/root/config
       - ./certs:/root/certs
+    networks:
+      - front-tier
+      - back-tier
+    ports:
+      - "7000:7000"
 
   bpm:
     image: massoft/applications-service:latest
-    container_name: "bpm"
     restart: always
-    environment:
-      - CONFIG_PATH=config/config.yaml
+    env_file:
+      - .env
     volumes:
       - ./config:/root/config
       - ./certs:/root/certs
+    networks:
+      - back-tier
 
   bpmclient:
     image: massoft/mas-bpm-client:latest
-    container_name: "bpmclient"
     restart: always
     ports:
       - "1080:1080"
@@ -76,11 +86,47 @@ services:
     volumes:
       - ./config:/root/config
       - ./certs:/root/certs
-    environment:
-      - CLIENT_gateway=http://gateway:7000
+    env_file:
+      - .env
+    networks:
+      - front-tier
+
+  portlclient:
+    image: massoft/bpm-portal:latest
+    restart: always
+    ports:
+      - "1081:1080"
+      - "10444:10443"
+    volumes:
+      - ./config:/root/config
+      - ./certs:/root/certs
+    env_file:
+      - .env
+    networks:
+      - front-tier
+
+  portadminlclient:
+    image: massoft/bpm-portal_admin:latest
+    restart: always
+    ports:
+      - "1082:1080"
+      - "10445:10443"
+    volumes:
+      - ./config:/root/config
+      - ./certs:/root/certs
+    env_file:
+      - .env
+    networks:
+      - front-tier
 
   bpmdb:
     image: massoft/bpm-db:latest
-    container_name: "bpmdb"
+    restart: always
     extra_hosts:
       - "myserver:192.168.1.10"
+    networks:
+      - back-tier
+
+networks:
+  front-tier:
+  back-tier:
